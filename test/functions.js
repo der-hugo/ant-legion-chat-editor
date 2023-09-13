@@ -1,4 +1,4 @@
-const exampleTemplate = "This is an [[-][-]ff0000]EXAMPLE! [#07]
+const exampleTemplate = "This is an [[-][-]ff0000]EXAMPLE! [#07]";
 const enhancementTemplate = "I upgraded [[-][-]00ff00]Example [[-][-]ffffff]to [[-][-]00ff00]Lv.99[[-][-]ffffff] and got incredible bonus stats. [[-][-]00ff00]Tap to view";
 const legacyTemplate = "I inherited [[-][-]ff0000]T4 Mystic Example [[-][-]00ff00](Tap to view)";
 const hatchTemplate = "I got [[-][-]ff0000]Example x30 [[-][-]ffffff] in Rare Hatchery. ([[-][-]00ff00]Tap to view[[-][-]ffffff])";
