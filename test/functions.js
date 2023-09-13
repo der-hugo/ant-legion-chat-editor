@@ -12,21 +12,21 @@ var currentColor = null;
 
 function TemplateEnhance()
 {
-    var input = document.getElementById("input").value = enhancementTemplate;
+    document.getElementById("input").value = enhancementTemplate;
 
     OnInputChanged();
 }
 
 function TemplateLegacy()
 {
-    var input = document.getElementById("input").value = legacyTemplate;
+    document.getElementById("input").value = legacyTemplate;
 
     OnInputChanged();
 }
 
 function TemplateHatch()
 {
-    var input = document.getElementById("input").value = hatchTemplate;
+    document.getElementById("input").value = hatchTemplate;
 
     OnInputChanged();
 }
