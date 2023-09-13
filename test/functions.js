@@ -1,7 +1,7 @@
-const exampleTemplate = "This is an [[-][-]ff0000]EXAMPLE! [#07]";
-const enhancementTemplate = "I upgraded [[-][-]00ff00]Example [[-][-]ffffff]to [[-][-]00ff00]Lv.99[[-][-]ffffff] and got incredible bonus stats. [[-][-]00ff00]Tap to view";
-const legacyTemplate = "I inherited [[-][-]ff0000]T4 Mystic Example [[-][-]00ff00](Tap to view)";
-const hatchTemplate = "I got [[-][-]ff0000]Example x30 [[-][-]ffffff] in Rare Hatchery. ([[-][-]00ff00]Tap to view[[-][-]ffffff])";
+//const exampleTemplate = "This is an [[-][-]ff0000]EXAMPLE! [#07]";
+//const enhancementTemplate = "I upgraded [[-][-]00ff00]Example [[-][-]ffffff]to [[-][-]00ff00]Lv.99[[-][-]ffffff] and got incredible bonus stats. [[-][-]00ff00]Tap to view";
+//const legacyTemplate = "I inherited [[-][-]ff0000]T4 Mystic Example [[-][-]00ff00](Tap to view)";
+//const hatchTemplate = "I got [[-][-]ff0000]Example x30 [[-][-]ffffff] in Rare Hatchery. ([[-][-]00ff00]Tap to view[[-][-]ffffff])";
 
 
 const emojiPattern = /\[#\d{2}]/g;
@@ -10,6 +10,7 @@ const colorWithoutTextPattern = /(\[\[-]\[-][a-fA-F0-9]{6}])(?=\s*\[#\d{2}]|\s*\
 
 var currentColor = null;
 
+/*
 function TemplateEnhance()
 {
     document.getElementById("input").value = enhancementTemplate;
@@ -30,6 +31,7 @@ function TemplateHatch()
 
     OnInputChanged();
 }
+*/
 
 
 
