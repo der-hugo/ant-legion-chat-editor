@@ -1,8 +1,37 @@
-﻿const emojiPattern = /\[#\d{2}]/g;
+const exampleTemplate = "This is an [[-][-]ff0000]EXAMPLE! [#07]
+const enhancementTemplate = "I upgraded [[-][-]00ff00]Example [[-][-]ffffff]to [[-][-]00ff00]Lv.99[[-][-]ffffff] and got incredible bonus stats. [[-][-]00ff00]Tap to view";
+const legacyTemplate = "I inherited [[-][-]ff0000]T4 Mystic Example [[-][-]00ff00](Tap to view)";
+const hatchTemplate = "I got [[-][-]ff0000]Example x30 [[-][-]ffffff] in Rare Hatchery. ([[-][-]00ff00]Tap to view[[-][-]ffffff])";
+
+
+const emojiPattern = /\[#\d{2}]/g;
 const colorPattern = /\[\[-]\[-]([a-fA-F0-9]{6})]/g;
 const colorWithoutTextPattern = /(\[\[-]\[-][a-fA-F0-9]{6}])(?=\s*\[#\d{2}]|\s*\[\[-]\[-][a-fA-F0-9]{6})/g;
 
 var currentColor = null;
+
+function TemplateEnhance()
+{
+    var input = document.getElementById("input").value = enhancementTemplate;
+
+    OnInputChanged();
+}
+
+function TemplateLegacy()
+{
+    var input = document.getElementById("input").value = legacyTemplate;
+
+    OnInputChanged();
+}
+
+function TemplateHatch()
+{
+    var input = document.getElementById("input").value = hatchTemplate;
+
+    OnInputChanged();
+}
+
+
 
 function OnSelect() {
     var input = document.getElementById("input");
