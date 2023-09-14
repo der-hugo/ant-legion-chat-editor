@@ -8,10 +8,9 @@
     <script src="functions.js"></script>
 </head>
 
-<body onload="OnInputChanged()">
+<body onload="Init()">
 <div style="padding: 0 5% 5%;">
-    <h1 class="shadow-sm"
-        style="padding-top: 40px;    
+    <h1 style="padding-top: 40px;    
         padding-bottom: 40px;   
         text-align: center;    
         color: #957dad;   
@@ -19,11 +18,11 @@
         Ant Legion - Chat Editor</h1>
 
 
-    <div>
-        <button onclick="UpperCase()">Upper Case</button>
-        <button onclick="LowerCase()"> Lower Case</button>
-        <button onclick="Capitalize()"> Capitalize</button>
-        <button onclick="Clear()"> Clear Text</button>
+    <div style="margin: 0 auto ; text-align: center">
+        <button onclick="UpperCase()">UPPER CASE</button>
+        <button onclick="LowerCase()">lower case</button>
+        <button onclick="Capitalize()">Capitalize</button>
+        <button onclick="Clear()">Clear Text</button>
         <label for="color">Text Color: </label><input type="color" id="color" value="#ffffff" style="width: 50px"
                                                       onchange="OnColorChanged()">
     </div>
@@ -182,6 +181,31 @@
     border-radius: 5px;
     box-shadow: inset 0 0 10px #898989;
     min-height: 18px; width: 100%; max-width: 100%;">
+    </div>
+
+
+    <div>
+        Templates
+        <div>
+            <button class="template" onclick="TemplateLegacy()">
+                I inherited a <span style="color: #ff0000">T4 Mystic Example Legacy!</span> <span style="color: #00ff00">(Tap to view)</span>
+            </button>
+        </div>
+        <div>
+            <button class="template" onclick="TemplateEnhance()">
+                I upgraded <span style="color: #00ff00">Example</span> to <span style="color: #00ff00">Lv.99</span> and obtained incredible bonus stats. <span style="color: #00ff00">Tap to view</span>
+            </button>
+        </div>
+        <div>
+            <button class="template" onclick="TemplateHatch()">I inherited a
+                <span style="color: #ff0000">T4 Mystic Example Legacy!</span> <span style="color: #00ff00">(Tap to view)</span>
+            </button>
+        </div>
+        <div>
+            <button class="template" onclick="TemplateExchange()">I inherited a
+                I've placed an order request to exchange <span style="color: #00ff00">[Beetle Egg]</span> for <span style="color: #00ff00">[Moth Egg]</span>. <span style="color: #00ff00">(Tap to view)</span>
+            </button>
+        </div>
     </div>
 
 </div>

@@ -1,19 +1,20 @@
 ﻿body{
     background-color: black;
-    color: white;
+    color: #ffffc8;
 }
 
 .textfield{
     
 }
 
-textarea{
-    color: white;
-    background-color: black;
+.template{
+    background-color: #000033;
+    color: #ffffc8;
 }
 
-button {
-    
+textarea{
+    color: #ffffc8;
+    background-color: black;
 }
 
 table{
@@ -22,7 +23,7 @@ table{
     border-collapse: collapse;
 }
 
-button.icon{
+.icon{
     border-radius: 10px;
     width: 30px;
     height: 30px;
