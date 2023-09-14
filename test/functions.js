@@ -1,90 +1,55 @@
-const exampleTemplate = "This is an [[-][-]ff0000]EXAMPLE! [#07]";
-const enhancementTemplate = "I upgraded [[-][-]00ff00]Example [[-][-]ffffc8]to [[-][-]00ff00]Lv.99[[-][-]ffffc8]\n and obtained incredible bonus stats. [[-][-]00ff00]Tap to view";
-const legacyTemplate = "I inherited a [[-][-]ff0000]T4 Mystic Example Legacy! [[-][-]00ff00](Tap to view)";
-const hatchTemplate = "I got [[-][-]ff0000]Example x30 [[-][-]ffffc8] in Rare Hatchery. [[-][-]00ff00](Tap to view)[[-][-]ffffc8]";
-const exchangeTemplate = "I've placed an order request to exchange [[-][-]00ff00][Beetle Egg] [[-][-]ffffc8] for [[-][-]00ff00][Moth Egg][[-][-]ffffc8]. [[-][-]00ff00](Tap to view)";
-const arenaTemplate = "I've made it to No.[[-][-]00ff00]2 [[-][-]ffffc8]in Arena!";
+const input = document.getElementById("input");
+const preview = document.getElementById("preview");
+const color = document.getElementById("color");
 
-const emojiPattern = /\[#\d{2}]/g;
-const colorPattern = /\[\[-]\[-]([a-fA-F0-9]{6})]/g;
-const colorWithoutTextPattern = /(\[\[-]\[-][a-fA-F0-9]{6}])(?=\s*\[#\d{2}]|\s*\[\[-]\[-][a-fA-F0-9]{6})/g;
-
-let currentColor = null;
+const exampleTemplate = 'This is an <font color="#ff0000">EXAMPLE</font>! 😀';
 const defaultColor = "ffffc8";
 
 function Init() {
-    document.getElementById("input").value = exampleTemplate;
+    input.innerHTML = exampleTemplate;
+
+    color.value = "#" + defaultColor;
 
     OnInputChanged();
 }
 
-function TemplateEnhance() {
-    document.getElementById("input").value = enhancementTemplate;
-
-    OnInputChanged();
-}
-
-function TemplateExchange() {
-    document.getElementById("input").value = exchangeTemplate;
-
-    OnInputChanged();
-}
-
-function TemplateLegacy() {
-    document.getElementById("input").value = legacyTemplate;
-
-    OnInputChanged();
-}
-
-function TemplateHatch() {
-    document.getElementById("input").value = hatchTemplate;
+function SetTemplate() {
+    document.getElementById("input").innerHTML = event.currentTarget.innerHTML;
 
     OnInputChanged();
 }
 
 function OnSelect() {
-    const input = document.getElementById("input");
-    const start = input.selectionStart;
-    const beforeSelection = input.value.substring(0, start);
+    console.log("select");
 
-    const emojiMatches = [...beforeSelection.matchAll(emojiPattern)];
-    const colorMatches = [...beforeSelection.matchAll(colorPattern)];
+    const selection = window.getSelection();
+    const range = selection.getRangeAt(0);
 
-    const lastEmoji = emojiMatches[emojiMatches.length - 1];
-    const lastColor = colorMatches[colorMatches.length - 1];
+    // Get the parent element of the selected text
+    const parentElement = range.commonAncestorContainer;
 
-    if (lastColor != null && (lastEmoji == null || lastColor.index > lastEmoji.index)) {
-        currentColor = lastColor;
-        document.getElementById("color").value = "#" + lastColor[1];
-    } else {
-        document.getElementById("color").value = "#" + defaultColor;
+    let clickedColor = null;
+
+    // Traverse up the DOM tree to find the nearest <font> tag
+    let currentNode = parentElement;
+    while (currentNode && currentNode !== input) {
+        if (currentNode.tagName && currentNode.tagName.toLowerCase() === 'font') {
+            clickedColor = currentNode.getAttribute('color');
+        }
+        currentNode = currentNode.parentNode;
     }
+
+    if (clickedColor == null) {
+        clickedColor = "#" + defaultColor;
+    }
+
+
+    color.value = clickedColor;
 }
 
 function OnColorChanged() {
-    const input = document.getElementById("input");
-    const inputValue = input.value;
-    const start = input.selectionStart;
-    const finish = input.selectionEnd;
-
-    const color = document.getElementById("color").value.substring(1);
-
-    let result = inputValue.substring(0, start) + "[[-][-]" + color + "]" + inputValue.substring(start, finish);
-
-    if (start !== finish) {
-        if (currentColor != null) {
-            result += "[[-][-]" + currentColor[1] + "]";
-        } else {
-            result += "[[-][-]" + defaultColor + "]";
-        }
-    }
-
-    result += inputValue.substring(finish, inputValue.length);
-
-    input.value = result;
-
-    input.selectionStart = finish;
-    input.selectionEnd = finish;
+    const selectedColor = color.value;
+    document.execCommand('foreColor', false, selectedColor);
 
     OnInputChanged();
     OnSelect();
@@ -92,75 +57,47 @@ function OnColorChanged() {
 
 
 function OnInputChanged() {
-    const input = document.getElementById("input");
-    const preview = document.getElementById("preview");
+    let inputValue = input.innerHTML;
 
-    let inputValue = input.value;
+    // remove empty color tags
+    inputValue = inputValue.replaceAll(/<font color="#\d{6}">\s*<\/font>/g, "");
 
-    // removes color tags without text
-    inputValue = inputValue.replaceAll(colorWithoutTextPattern, "");
-    input.value = inputValue;
+    // replace font tags by codes
+    inputValue = inputValue.replaceAll(/<font color="#([a-fA-F0-9]{6})">/g, "[[-][-]$1]");
 
-    preview.innerHTML = "";
-    const parts = inputValue.split(/(\[\[-]\[-][0-9a-fA-F]{6}])|(\[#\d{2}])/g);
+    // remove closing font tags
+    inputValue = inputValue.replaceAll(/<\/font>/g, "[[-][-]" + defaultColor + "]");
 
-    let color = defaultColor;
-    let currentSpan = null;
+    // remove empty colors
+    inputValue = inputValue.replaceAll(/\[\[-]\[-][a-fA-F0-9]{6}](\s*\[\[-]\[-][a-fA-F0-9]{6}])/g, "$1");
 
-    for (let index in parts) {
-        const part = parts[index];
-        if (part === undefined) continue;
+    // remove trailing color
+    inputValue = inputValue.replaceAll(/\[\[-]\[-][a-fA-F0-9]{6}]\s*$/g, "");
 
-        if (part.match(emojiPattern)) {
-            let emoji = null;
-            try {
-                emoji = indexToEmoji[part];
-            } catch {
-                if (currentSpan !== null) {
-                    currentSpan.appendChild(document.createTextNode(part));
-                } else {
-                    preview.appendChild(document.createTextNode(part));
-                }
-                continue;
-            }
+    const emojiRegex = new RegExp(Object.keys(emojiToIndex).join("|"), "g");
 
-            if (color !== defaultColor) {
-                if (currentSpan !== null) {
-                    preview.appendChild(currentSpan);
-                    currentSpan = null;
-                }
-                color = defaultColor;
-            }
+    let match = null;
 
-            preview.appendChild(document.createTextNode(emoji));
+    while ((match = emojiRegex.exec(inputValue)) !== null) {
 
-        } else {
-            const colorMatch = part.match(colorPattern);
-            if (colorMatch !== null) {
-                const newColor = colorMatch[0].substring(7, 13);
-                if (color !== newColor) {
-                    if (currentSpan !== null) {
-                        preview.appendChild(currentSpan);
-                        currentSpan = null;
-                    }
-                    color = newColor;
-                    currentSpan = document.createElement("span");
-                    currentSpan.style.color = "#" + color;
-                }
-            } else {
-                if (currentSpan !== null) {
-                    currentSpan.appendChild(document.createTextNode(part));
-                } else {
-                    preview.appendChild(document.createTextNode(part));
-                }
+        let replacement = emojiToIndex[match[0]];
+
+        const before = inputValue.substring(0, match.index);
+        const after = inputValue.substring(match.index + match[0].length);
+        const colorMatches = [...before.matchAll(/\[\[-]\[-]([a-fA-F0-9]{6})]/g)];
+        const lastColorMatch = colorMatches[colorMatches.length - 1];
+
+        if (lastColorMatch) {
+            if (lastColorMatch[1] !== defaultColor) {
+                replacement += lastColorMatch[0];
             }
         }
 
+
+        inputValue = before + replacement + after;
     }
 
-    if (currentSpan !== null) {
-        preview.appendChild(currentSpan);
-    }
+    preview.innerHTML = inputValue;
 }
 
 const indexToEmoji = {
@@ -336,67 +273,18 @@ const emojiToIndex = {
 
 function Insert() {
     // insert a character at the cursor position
-    const textarea = document.getElementById("input");
-    const start = textarea.selectionStart;
-    const finish = textarea.selectionEnd;
-    const insertEmoji = event.target.innerHTML;
+    const insertEmoji = event.currentTarget.innerHTML;
 
-    let insert;
+    const selection = window.getSelection();
+    const start = selection.getRangeAt(0).startOffset;
+    const finish = selection.getRangeAt(0).endOffset;
 
-    try {
-        insert = emojiToIndex[insertEmoji];
-    } catch {
-        insert = insertEmoji;
-    }
-
-    textarea.value = textarea.value.substring(0, start) + insert + textarea.value.substring(finish, textarea.value.length);
-
-    textarea.focus();
-
-    textarea.selectionStart = start + insert.length;
-    textarea.selectionEnd = start + insert.length;
+    selection.anchorNode.textContent = selection.anchorNode.textContent.substring(0, start) + insertEmoji + selection.anchorNode.textContent.substring(finish, selection.anchorNode.textContent.length);
 
     OnInputChanged();
     OnSelect();
-}
 
-function UpperCase() {
-    // upper case the selected text
-    const textarea = document.getElementById("input");
-    const start = textarea.selectionStart;
-    const finish = textarea.selectionEnd;
-    const sel = textarea.value.substring(start, finish);
-    textarea.value = textarea.value.substring(0, start) + sel.toUpperCase() + textarea.value.substring(finish);
+    input.focus();
 
-    OnInputChanged();
-}
-
-function LowerCase() {
-    // lower case the selected text
-    const textarea = document.getElementById("input");
-    const start = textarea.selectionStart;
-    const finish = textarea.selectionEnd;
-    const sel = textarea.value.substring(start, finish);
-    textarea.value = textarea.value.substring(0, start) + sel.toLowerCase() + textarea.value.substring(finish);
-
-    OnInputChanged();
-}
-
-function Capitalize() {
-    // capitalize each word of the selected text
-    const textarea = document.getElementById("input");
-    const start = textarea.selectionStart;
-    const finish = textarea.selectionEnd;
-    const sel = textarea.value.substring(start, finish);
-    textarea.value = textarea.value.substring(0, start) + sel.replace(/\w\S*/g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    }) + textarea.value.substring(finish);
-
-    OnInputChanged();
-}
-
-function Clear() {
-    document.getElementById("input").value = "";
-    document.getElementById("raw").value = "";
-    document.getElementById("preview").value = "";
+    selection.setPosition(selection.anchorNode, selection.focusOffset + insertEmoji.length);
 }

@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <title>Ant Legion - Text Editor</title>
     <link rel="stylesheet" href="styles.css"/>
-    <script src="functions.js"></script>
 </head>
 
 <body onload="Init()">
@@ -17,15 +16,33 @@
         font-family: 'Montserrat', sans-serif">
         Ant Legion - Chat Editor</h1>
 
-
-    <div style="margin: 0 auto ; text-align: center">
-        <button onclick="UpperCase()">UPPER CASE</button>
-        <button onclick="LowerCase()">lower case</button>
-        <button onclick="Capitalize()">Capitalize</button>
-        <button onclick="Clear()">Clear Text</button>
-        <label for="color">Text Color: </label><input type="color" id="color" value="#ffffff" style="width: 50px"
-                                                      onchange="OnColorChanged()">
+    <div>
+        Templates
+        <div>
+            <button class="template" onclick="SetTemplate()">
+                I inherited a <font color="#ff0000">T4 Mystic Example Legacy!</font> <font color="#00ff00">(Tap to
+                view)</font>
+            </button>
+        </div>
+        <div>
+            <button class="template" onclick="SetTemplate()">
+                I upgraded <font color="#00ff00">Example</font> to <font color="#00ff00">Lv.99</font> and obtained
+                incredible bonus stats. <font color="#00ff00">Tap to view</font>
+            </button>
+        </div>
+        <div>
+            <button class="template" onclick="SetTemplate()">I inherited a
+                I've placed an order request to exchange <font color="#00ff00">[Beetle Egg]</font> for <font
+                        color="#00ff00">[Moth Egg]</font>. <font color="#00ff00">(Tap to view)</font>
+            </button>
+        </div>
+        <div>
+            <button class="template" onclick="SetTemplate()">I inherited a
+                I've made it to No.<font color="#00ff00">2</font> in Arena!
+            </button>
+        </div>
     </div>
+    
 
     <table>
         <tr>
@@ -167,15 +184,18 @@
         </tr>
     </table>
 
-    <div>Chat Message</div>
-    <textarea id="input" oninput="OnInputChanged()" onselect="OnSelect()" onclick="OnSelect()" style="padding: 10px;
-    border-color: #957dad;
-    border-width: thick;
+    <div>
+        <label for="color">Text Color</label>
+        <input type="color" id="color" style="width: 50px" onchange="OnColorChanged()"></div>
+    <div id="input" contenteditable="true" style="padding: 10px;
+    border: thick solid #957dad;
     border-radius: 5px;
     box-shadow: inset 0 0 10px #898989; width: 100%; max-width: 100%; min-width: 100%; height: 70px ; min-height: 18px;"
-              autofocus>This is an [[-][-]ff0000]EXAMPLE! [#07]</textarea>
-
-    <div>Preview</div>
+         autofocus oninput="OnInputChanged()" onchange="OnInputChanged()" onselect="OnSelect()" onmouseup="OnSelect()" onclick="OnSelect()">This is an [[-][-]ff0000]EXAMPLE! [#07]
+    </div>
+    
+    
+    <div>Chat Message</div>
     <div id="preview" style="padding: 10px;
     border: thick solid #957dad;
     border-radius: 5px;
@@ -183,32 +203,9 @@
     min-height: 18px; width: 100%; max-width: 100%;">
     </div>
 
-
-    <div>
-        Templates
-        <div>
-            <button class="template" onclick="TemplateLegacy()">
-                I inherited a <span style="color: #ff0000">T4 Mystic Example Legacy!</span> <span style="color: #00ff00">(Tap to view)</span>
-            </button>
-        </div>
-        <div>
-            <button class="template" onclick="TemplateEnhance()">
-                I upgraded <span style="color: #00ff00">Example</span> to <span style="color: #00ff00">Lv.99</span> and obtained incredible bonus stats. <span style="color: #00ff00">Tap to view</span>
-            </button>
-        </div>
-        <div>
-            <button class="template" onclick="TemplateHatch()">I inherited a
-                <span style="color: #ff0000">T4 Mystic Example Legacy!</span> <span style="color: #00ff00">(Tap to view)</span>
-            </button>
-        </div>
-        <div>
-            <button class="template" onclick="TemplateExchange()">I inherited a
-                I've placed an order request to exchange <span style="color: #00ff00">[Beetle Egg]</span> for <span style="color: #00ff00">[Moth Egg]</span>. <span style="color: #00ff00">(Tap to view)</span>
-            </button>
-        </div>
-    </div>
-
 </div>
 <h6 style="text-align:center;">Bubu 2023.</h6>
+
+<script src="functions.js"></script>
 </body>
 </html>
