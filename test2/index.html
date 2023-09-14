@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Ant Legion - Text Editor</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+
+<body onload="OnInputChanged()">
+<div style="padding: 0 5% 5%;">
+    <h1 style="padding-top: 40px;    
+        padding-bottom: 40px;   
+        text-align: center;    
+        color: #957dad;   
+        font-family: 'Montserrat', sans-serif">
+        Ant Legion - Chat Preview</h1>
+
+    <a href="../test/index.html">To Chat Editor</a>
+    
+    <div>Chat Message</div>
+    <textarea id="input" oninput="OnInputChanged()" onselect="OnSelect()" onclick="OnSelect()" style="padding: 10px;
+    border-color: #957dad;
+    border-width: thick;
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px #898989; width: 100%; max-width: 100%; min-width: 100%; height: 70px ; min-height: 18px;"
+              autofocus>This is an [[-][-]ff0000]EXAMPLE! [#07]</textarea>
+
+    <div>Preview</div>
+    <div id="preview" style="padding: 10px;
+    border: thick solid #957dad;
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px #898989;
+    min-height: 18px; width: 100%; max-width: 100%;">
+    </div>
+
+</div>
+<h6 style="text-align:center;">Bubu 2023.</h6>
+
+<script src="functions.js"></script>
+</body>
+</html>
