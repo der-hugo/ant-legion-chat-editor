@@ -85,7 +85,7 @@ const indexToEmoji = {
     "[#83]": "👀",
     "[#84]": "🥚",
 }
-const defaultColor = "ffffc8";
+const defaultColor = "ffffcc";
 
 function OnInputChanged() {
     let inputValue = input.value;
