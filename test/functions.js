@@ -3,7 +3,7 @@ const preview = document.getElementById("preview");
 const color = document.getElementById("color");
 
 const exampleTemplate = 'This is an <font color="#ff0000">EXAMPLE</font>! 😀';
-const defaultColor = "ffffc8";
+const defaultColor = "ffffcc";
 
 const emojiToIndex = {
     "😀": "[#07]",
