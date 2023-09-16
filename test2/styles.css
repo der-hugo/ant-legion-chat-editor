@@ -1,19 +1,11 @@
 ﻿body{
     background-color: black;
-    color: white;
-}
-
-.textfield{
-    
+    color: #ffffcc;
 }
 
 textarea{
-    color: white;
+    color: #ffffcc;
     background-color: black;
-}
-
-button {
-    
 }
 
 table{
