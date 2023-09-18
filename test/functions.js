@@ -132,6 +132,12 @@ function OnSelect() {
     color.value = clickedColor;
 }
 
+function DefaultColor(){
+    color.value = "#" + defaultColor;
+
+    OnColorChanged();
+}
+
 function OnColorChanged() {
     const selectedColor = color.value;
     document.execCommand('foreColor', false, selectedColor);
@@ -156,7 +162,7 @@ function OnInputChanged() {
     inputValue = inputValue.replaceAll(/\[\[-]\[-][a-fA-F0-9]{6}](\s*\[\[-]\[-][a-fA-F0-9]{6}])/g, "$1");
 
     // remove trailing color
-    inputValue = inputValue.replaceAll(/\[\[-]\[-][a-fA-F0-9]{6}]\s*$/g, "");
+    inputValue = inputValue.replaceAll(/\[\[-]\[-][a-fA-F0-9]{6}]\s*[\n$]/g, "");
 
     const emojiRegex = new RegExp(Object.keys(emojiToIndex).join("|"), "g");
 
@@ -176,8 +182,7 @@ function OnInputChanged() {
                 replacement += lastColorMatch[0];
             }
         }
-
-
+        
         inputValue = before + replacement + after;
     }
 

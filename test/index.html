@@ -15,36 +15,42 @@
         color: #957dad;   
         font-family: 'Montserrat', sans-serif">
         Ant Legion - Chat Editor</h1>
-    
+
     <a href="../test2/index.html">To Chat Preview</a>
 
     <div>
         Templates
         <div>
             <button class="template" onclick="SetTemplate()">
-                I inherited a <font color="#ff0000">T4 Mystic Example Legacy!</font> <font color="#00ff00">(Tap to
+                I inherited a <font color="#ff0000">T4 Mystic Example Ant Legacy!</font> <font color="#00ff00">(Tap to
                 view)</font>
             </button>
         </div>
         <div>
             <button class="template" onclick="SetTemplate()">
-                I upgraded <font color="#00ff00">Example</font> to <font color="#00ff00">Lv.99</font> and obtained
-                incredible bonus stats. <font color="#00ff00">Tap to view</font>
+                I upgraded <font color="#00ff00">Example Enhancement</font> to <font color="#00ff00">Lv.99</font> and
+                <br>obtained incredible bonus stats. <font color="#00ff00">Tap to view</font>
             </button>
         </div>
         <div>
-            <button class="template" onclick="SetTemplate()">I inherited a
-                I've placed an order request to exchange <font color="#00ff00">[Beetle Egg]</font> for <font
-                        color="#00ff00">[Moth Egg]</font>. <font color="#00ff00">(Tap to view)</font>
+            <button class="template" onclick="SetTemplate()">
+                I've placed an order request to exchange <font color="#00ff00">[Beetle Egg]</font> for
+                <br><font color="#00ff00">[Moth Egg]</font>. <font color="#00ff00">(Tap to view)</font>
             </button>
         </div>
         <div>
-            <button class="template" onclick="SetTemplate()">I inherited a
+            <button class="template" onclick="SetTemplate()">
                 I've made it to No.<font color="#00ff00">2</font> in Arena!
             </button>
         </div>
+        <div>
+            <button class="template" onclick="SetTemplate()">
+                I got <font color="#ff0000">Mythic Example Upgrade</font> through fostering!
+                <br><font color="#00ff00">(Tap to check)</font>
+            </button>
+        </div>
     </div>
-    
+
 
     <table>
         <tr>
@@ -188,15 +194,25 @@
 
     <div>
         <label for="color">Text Color</label>
-        <input type="color" id="color" style="width: 50px" onchange="OnColorChanged()"></div>
+        <input type="color" id="color" style="width: 50px" list="presetColors" onchange="OnColorChanged()">
+        <datalist id="presetColors">
+            <option>#ffffcc</option>
+            <option>#ff0000</option>
+            <option>#00ff00</option>
+            <option>#0000ff</option>
+            <option>#41beee</option>
+        </datalist>
+        
+    </div>
     <div id="input" contenteditable="true" style="padding: 10px;
     border: thick solid #957dad;
     border-radius: 5px;
     box-shadow: inset 0 0 10px #898989; width: 100%; max-width: 100%; min-width: 100%; height: 70px ; min-height: 18px;"
-         autofocus oninput="OnInputChanged()" onchange="OnInputChanged()" onselect="OnSelect()" onmouseup="OnSelect()" onclick="OnSelect()">This is an [[-][-]ff0000]EXAMPLE! [#07]
+         autofocus oninput="OnInputChanged()" onchange="OnInputChanged()" onselect="OnSelect()" onmouseup="OnSelect()"
+         onclick="OnSelect()">This is an [[-][-]ff0000]EXAMPLE! [#07]
     </div>
-    
-    
+
+
     <div>Chat Message</div>
     <div id="preview" style="padding: 10px;
     border: thick solid #957dad;
