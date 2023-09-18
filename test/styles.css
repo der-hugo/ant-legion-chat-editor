@@ -1,16 +1,16 @@
 ﻿body{
     background-color: black;
-    color: #ffffc8;
+    color: #ffffcc;
 }
 
 .template{
     background-color: #000033;
-    color: #ffffc8;
+    color: #ffffcc;
     text-align: left;
 }
 
 textarea{
-    color: #ffffc8;
+    color: #ffffcc;
     background-color: black;
 }
 
