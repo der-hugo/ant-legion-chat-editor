@@ -104,6 +104,14 @@ function SetTemplate() {
     OnInputChanged();
 }
 
+function Focus(){
+    input.focus();
+}
+
+function CopyToClipboard(){
+    navigator.clipboard.writeText(preview.textContent).then(r => alert("Copied to clipboard!"));
+}
+
 function OnSelect() {
     console.log("select");
 
@@ -162,7 +170,7 @@ function OnInputChanged() {
     inputValue = inputValue.replaceAll(/\[\[-]\[-][a-fA-F0-9]{6}](\s*\[\[-]\[-][a-fA-F0-9]{6}])/g, "$1");
 
     // remove trailing color
-    inputValue = inputValue.replaceAll(/\[\[-]\[-][a-fA-F0-9]{6}]\s*[\n$]/g, "");
+    inputValue = inputValue.replaceAll(/\[\[-]\[-][a-fA-F0-9]{6}]\s*<div>|<br>|$/g, "");
 
     const emojiRegex = new RegExp(Object.keys(emojiToIndex).join("|"), "g");
 
@@ -198,13 +206,16 @@ function Insert() {
     const selection = window.getSelection();
     const start = selection.getRangeAt(0).startOffset;
     const finish = selection.getRangeAt(0).endOffset;
+    const text = selection.anchorNode.textContent;
+    const before = text.substring(0, start);
+    const after = text.substring(finish);
 
-    selection.anchorNode.textContent = selection.anchorNode.textContent.substring(0, start) + insertEmoji + selection.anchorNode.textContent.substring(finish, selection.anchorNode.textContent.length);
+    selection.anchorNode.textContent = before + insertEmoji + after;
 
     OnInputChanged();
     OnSelect();
 
     input.focus();
 
-    selection.setPosition(selection.anchorNode, selection.focusOffset + insertEmoji.length);
+    selection.setPosition(selection.anchorNode, finish + insertEmoji.length);
 }

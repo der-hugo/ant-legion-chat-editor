@@ -199,8 +199,9 @@
             <option>#ffffcc</option>
             <option>#ff0000</option>
             <option>#00ff00</option>
-            <option>#0000ff</option>
+            <option>#ffff00</option>
             <option>#41beee</option>
+            <option>#0c1518</option>
         </datalist>
         
     </div>
@@ -208,7 +209,7 @@
     border: thick solid #957dad;
     border-radius: 5px;
     box-shadow: inset 0 0 10px #898989; width: 100%; max-width: 100%; min-width: 100%; height: 70px ; min-height: 18px;"
-         autofocus oninput="OnInputChanged()" onchange="OnInputChanged()" onselect="OnSelect()" onmouseup="OnSelect()"
+         autofocus oninput="OnInputChanged()" onchange="OnInputChanged()" onblur="Focus()" onselect="OnSelect()" onmouseup="OnSelect()"
          onclick="OnSelect()">This is an [[-][-]ff0000]EXAMPLE! [#07]
     </div>
 
@@ -220,6 +221,7 @@
     box-shadow: inset 0 0 10px #898989;
     min-height: 18px; width: 100%; max-width: 100%;">
     </div>
+    <button onclick="CopyToClipboard()">Copy to Clipboard</button>
 
 </div>
 <h6 style="text-align:center;">Bubu 2023.</h6>

@@ -1,17 +1,17 @@
 ﻿body{
-    background-color: black;
+    background-color: #0c1518;
     color: #ffffcc;
 }
 
 .template{
-    background-color: #000033;
+    background-color: #0c1518;
     color: #ffffcc;
     text-align: left;
 }
 
 textarea{
     color: #ffffcc;
-    background-color: black;
+    background-color: #0c1518;
 }
 
 table{
